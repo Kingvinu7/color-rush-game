@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Rush - Farcaster Game</title>
     
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Color Rush - Farcaster Game" />
+    <meta property="og:description" content="Test your color matching skills! 30-second challenge with scoring and streaks." />
+    <meta property="og:image" content="https://color-rush-game.vercel.app/api/image" />
+    <meta property="og:url" content="https://color-rush-game.vercel.app/" />
+    
     <!-- Farcaster Frame Meta Tags -->
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="https://example.com/game-preview.png" />
-    <meta property="fc:frame:button:1" content="Play Game" />
-    <meta property="fc:frame:post_url" content="https://example.com/api/game" />
+    <meta property="fc:frame:image" content="https://color-rush-game.vercel.app/api/image" />
+    <meta property="fc:frame:image:aspect_ratio" content="1.91:1" />
+    <meta property="fc:frame:button:1" content="🎯 Play Color Rush" />
+    <meta property="fc:frame:button:1:action" content="link" />
+    <meta property="fc:frame:button:1:target" content="https://color-rush-game.vercel.app/" />
+    <meta property="fc:frame:post_url" content="https://color-rush-game.vercel.app/api/frame" />
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -162,6 +171,7 @@
         };
 
         function startGame() {
+            // Reset game state
             gameState = {
                 score: 0,
                 streak: 0,
@@ -174,12 +184,15 @@
                 gameTimer: null
             };
 
+            // Show game screen
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('gameOverScreen').classList.add('hidden');
             document.getElementById('gameScreen').classList.remove('hidden');
 
+            // Start timer
             gameState.gameTimer = setInterval(updateTimer, 1000);
 
+            // Generate first color
             generateNewColor();
             updateDisplay();
         }
@@ -188,9 +201,11 @@
             const randomIndex = Math.floor(Math.random() * colors.length);
             gameState.currentColor = colors[randomIndex];
             
+            // Sometimes show the word in a different color for extra challenge
             const wordElement = document.getElementById('colorWord');
             wordElement.textContent = colorWords[gameState.currentColor];
             
+            // 30% chance to show word in wrong color for difficulty
             if (Math.random() < 0.3 && gameState.score > 5) {
                 const wrongColors = colors.filter(c => c !== gameState.currentColor);
                 const wrongColor = wrongColors[Math.floor(Math.random() * wrongColors.length)];
@@ -206,6 +221,7 @@
             gameState.totalAttempts++;
 
             if (selectedColor === gameState.currentColor) {
+                // Correct answer
                 gameState.score += 10 + gameState.streak;
                 gameState.streak++;
                 gameState.correctAttempts++;
@@ -214,6 +230,7 @@
                     gameState.bestStreak = gameState.streak;
                 }
 
+                // Visual feedback
                 document.getElementById('gameScreen').classList.add('pulse-animation');
                 setTimeout(() => {
                     document.getElementById('gameScreen').classList.remove('pulse-animation');
@@ -221,8 +238,10 @@
 
                 generateNewColor();
             } else {
+                // Wrong answer
                 gameState.streak = 0;
                 
+                // Visual feedback
                 document.getElementById('gameScreen').classList.add('shake-animation');
                 setTimeout(() => {
                     document.getElementById('gameScreen').classList.remove('shake-animation');
@@ -245,14 +264,17 @@
             gameState.isPlaying = false;
             clearInterval(gameState.gameTimer);
 
+            // Calculate accuracy
             const accuracy = gameState.totalAttempts > 0 
                 ? Math.round((gameState.correctAttempts / gameState.totalAttempts) * 100)
                 : 0;
 
+            // Update final screen
             document.getElementById('finalScore').textContent = gameState.score;
             document.getElementById('bestStreak').textContent = gameState.bestStreak;
             document.getElementById('accuracy').textContent = accuracy + '%';
 
+            // Show game over screen
             document.getElementById('gameScreen').classList.add('hidden');
             document.getElementById('gameOverScreen').classList.remove('hidden');
         }
@@ -272,13 +294,15 @@
                     text: shareText
                 });
             } else {
+                // Fallback - copy to clipboard
                 navigator.clipboard.writeText(shareText).then(() => {
                     alert('Score copied to clipboard! Share it on Farcaster 🚀');
                 });
             }
         }
 
+        // Initialize display
         updateDisplay();
     </script>
 </body>
-  </html>
+</html>
