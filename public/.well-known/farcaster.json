@@ -4,16 +4,17 @@
     "name": "Color Rush",
     "iconUrl": "https://color-rush-game.vercel.app/icon.png",
     "homeUrl": "https://color-rush-game.vercel.app/",
-    "imageUrl": "https://color-rush-game.vercel.app/api/image",
+    "imageUrl": "https://color-rush-game.vercel.app/image.png",
     "splashImageUrl": "https://color-rush-game.vercel.app/splash.png",
-    "splashBackgroundColor": "#ffffff",
+    "splashBackgroundColor": "#eeccff",
     "tags": ["game", "casual", "fun"],
     "primaryCategory": "games",
-    "buttonTitle": "🎯 Play Color Rush"
+    "buttonTitle": "🎯 Play Color Rush",
+    "webhookUrl": "https://color-rush-game.vercel.app/api/webhook"
   },
   "accountAssociation": {
-    "header": "",
-    "payload": "",
-    "signature": ""
+    "header": "eyJMaWQiOiJlMDg2OSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiJweDQwZUY3QzcIYJRIRDBKQjY3NOMzN2VjODkxODMOQjIIMOKIODIIZDYifQ",
+    "payload": "eyJkb21haW4iOiJjb2xvci1ydXN0LWRhbWUwLnZlcmNlbC5hcHAifQ",
+    "signature": "MHgyZWI2MjE5Zjg0MEZZjRkMWUxY2MTE0ZWXYWExZTl4ZWM5MjIwMjAyNTJiZDRMZmI0ZDA5ZJRMNTRMMjJMNTFMNDgyY2Y3YzdjYTRMNzVINGY5MGM3ZTBkNjc1MjgyM214MMQYNDNjOWNKY2UWZMYXNDClYzEzY2NINWEOZTFi"
   }
 }
